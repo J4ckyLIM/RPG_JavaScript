@@ -15,7 +15,7 @@ function play(){
     document.getElementById('');
 }*/
 
-// Potion de soin + bouton 
+// Potion de soin + click bouton 
 document.getElementById('healthPot').addEventListener('click', healingPot);
 
 function healingPot(){
@@ -24,7 +24,7 @@ function healingPot(){
         console.log();
     }
 }
-// Potion de force + bouton
+// Potion de force + click bouton
 document.getElementById('strPot').addEventListener('click', strengthPot);
 
 function healingPot(){
@@ -44,7 +44,7 @@ function healingPot(){
 }
 */
 
-// Potion d'agilité + bouton
+// Potion d'agilité + click bouton
 document.getElementById('agiPot').addEventListener('click', agilityPot);
 
 function agilityPot(){
@@ -53,24 +53,20 @@ function agilityPot(){
         console.log();
     }
 }
-// Caractéristique du monstre 1
-var macron = {
+// Caractéristique des monstres 
+var monster= {
+    name:['macron','BAMMMBBOUU','Petdjarno'],
     strength: 5,
     stamina: 7,
     health: stamina,
 }
-// Caractéristique du monstre 2
-var gilletJaune = {
-    strength: 5,
-    stamina: 7,
-    health: stamina,
+
+// Fonction de selection de monstre de manière aléatoire
+
+function randomMonster(){
+    monster.name[Math.floor(Math.random()*3);]
 }
-// Caractéristique du monstre 3
-var trump = {
-    strength: 5,
-    stamina: 7,
-    health: stamina,
-}
+
 // Creation du shop + item dans le shop
 
 
@@ -81,4 +77,12 @@ document.getElementById('shopButton').addEventListener('click', shopAccess);
 
 function shopAccess(){
     
+}
+
+// Creation de la fonction d'attaque + click bouton
+
+document.getElementById('attackButton').addEventListener('click', attack);
+
+function attack(){
+    for(var hp of Object.keys())
 }
