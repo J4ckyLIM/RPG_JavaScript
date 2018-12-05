@@ -9,11 +9,11 @@ var hero = {
 };
 
 // Bouton play (projetRPG.html) 
-document.getElementById('start').addEventListener('click', play);
+/*document.getElementById('start').addEventListener('click', play);
 
 function play(){
-    console.log(hero);
-}
+    document.getElementById('');
+}*/
 
 // Potion de soin + bouton 
 document.getElementById('healthPot').addEventListener('click', healingPot);
