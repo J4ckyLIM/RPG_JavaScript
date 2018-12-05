@@ -29,7 +29,7 @@ document.getElementById('strPot').addEventListener('click', strengthPot);
 
 function healingPot(){
     for(let str of Object.keys(hero.strength)){
-        parseInt(str)+20;
+        parseInt(str)+1;
         console.log();
     }
 }
@@ -49,7 +49,7 @@ document.getElementById('agiPot').addEventListener('click', agilityPot);
 
 function agilityPot(){
     for(let agi of Object.keys(hero.agility)){
-        parseInt(agi)+20;
+        parseInt(agi)+1;
         console.log();
     }
 }
@@ -70,4 +70,15 @@ var trump = {
     strength: 5,
     stamina: 7,
     health: stamina,
+}
+// Creation du shop + item dans le shop
+
+
+
+// Bouton d'accès au shop
+
+document.getElementById('shopButton').addEventListener('click', shopAccess);
+
+function shopAccess(){
+    
 }
