@@ -2,10 +2,13 @@
 var hero = {
     strength: 10,
     agility: 10,
-    health: 100,
+    stamina: {
+        max_health: 100,
+        health: 100,
+    },
     name: "",
     inventory : [],
-    gold: "",
+    gold: 0,
 };
 
 // Bouton play (projetRPG.html) 
@@ -19,39 +22,30 @@ function play(){
 document.getElementById('healthPot').addEventListener('click', healingPot);
 
 function healingPot(){
-    for(let hp of Object.keys(hero.health)){
-        parseInt(hp)+20;
-        console.log();
-    }
+    var hp = hero.stamina.health+= 20;
+    console.log(hp);
 }
 // Potion de force + click bouton
 document.getElementById('strPot').addEventListener('click', strengthPot);
 
-function healingPot(){
-    for(let str of Object.keys(hero.strength)){
-        parseInt(str)+1;
-        console.log();
-    }
+function strengthPot(){
+    var str = hero.strength+=1;
+    console.log(str);
 }
 
 // Potion d'endurance + bouton
-/*document.getElementById('healthPot').addEventListener('click', )
-function healingPot(){
-    for(let hp of Object.keys(hero.health)){
-        parseInt(hp)+20;
-        console.log();
-    }
+document.getElementById('healthPot').addEventListener('click', staminaPot);
+function staminaPot(){
+    var sta = hero.stamina.max_health+= 1;
+    console.log(sta);
 }
-*/
 
 // Potion d'agilité + click bouton
 document.getElementById('agiPot').addEventListener('click', agilityPot);
 
 function agilityPot(){
-    for(let agi of Object.keys(hero.agility)){
-        parseInt(agi)+1;
-        console.log();
-    }
+    var agi = hero.agility+= 1;
+    console.log(agi);
 }
 // Caractéristique des monstres 
 var monster= {
@@ -64,7 +58,7 @@ var monster= {
 // Fonction de selection de monstre de manière aléatoire
 
 function randomMonster(){
-    monster.name[Math.floor(Math.random()*3);]
+    monster.name[Math.floor(Math.random()*2)];
 }
 
 // Creation du shop + item dans le shop
@@ -83,6 +77,6 @@ function shopAccess(){
 
 document.getElementById('attackButton').addEventListener('click', attack);
 
-function attack(){
+/*function attack(){
     for(var hp of Object.keys())
-}
+*/
