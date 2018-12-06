@@ -1,13 +1,15 @@
 // Caractéristique du personnage
 var hero = {
+    name: "",
     strength: 10,
     agility: 10,
     stamina: {
         max_health: 100,
         health: 100,
     },
-    name: "",
-    inventory : [],
+    inventory: {
+        lootPot: 0
+    },
     gold: 0
 };
 
@@ -39,35 +41,31 @@ var shopInventory = {
 
 
 // Fonction verification du nom + bouton play /!\ A MODIFIER!! NE FONCTIONNE PAS /!\
-/*document.getElementById('start').addEventListener('click', checkName);
-function checkName(){
-    var verifName = document.getElementById('charName').value;
 
-    if(verifName == null){
-        document.getElementById('errorName').innerHTML = "Veuillez rentrer un nom pour jouer.";
-    }
-    else{
-        document.getElementById('start').href = "./aventureRPG.html";
-    }
-}*/
 
 // Interface HP pour joueur et monstre /!\ A FINIR /!\
 function displayHeroHP(){
-    document.getElementById('heroHP').innerHTML = '<img src="https://opengameart.org/sites/default/files/styles/medium/public/heart_3.png": />' + hero.stamina.health + "/" + hero.stamina.max_health;
+    document.getElementById('heroHP').innerHTML = 'Vie: ' + hero.stamina.health + "/" + hero.stamina.max_health;
 }
+displayHeroHP();
+
 function displayMonsterHP(){
-    document.getElementById('monsterHP').innerHTML = '<img src="https://opengameart.org/sites/default/files/styles/medium/public/heart_3.png": />' + monster.stamina.health + "/" + monster.stamina.max_health;
+    document.getElementById('monsterHP').innerHTML = 'Vie: ' + monster.stamina.health + "/" + monster.stamina.max_health;
 }
+displayMonsterHP();
 
 // Interface statistique pour joueur et monstres
 
 function displayHeroStats(){
     document.getElementById('heroStatsHUD').innerHTML = '<li>💪 ' + hero.strength + '</li>' + '<li>🤸 ' + hero.agility + '</li>' + '<li>❤️ ' + hero.stamina.max_health + '</li>' + '<li>💵 ' + hero.gold + '</li>';
 }
+displayHeroStats();
 
 function displayMonsterStats(){
     document.getElementById('monsterStatsHUD').innerHTML = '<li>💪 ' + monster.strength + '</li>' + '<li>❤️ ' + monster.stamina.max_health + '</li>';
 }
+displayMonsterStats();
+
 // Potion de soin + click bouton 
 //document.getElementById('healthPot').addEventListener('click', healingPot);
 
@@ -110,24 +108,34 @@ function randomMonster(){
 
 // Bouton d'accès au shop
 
-/*document.getElementById('shopButton').addEventListener('click', shopAccess);
-
 function shopAccess(){
     
-}*/
+}
 
 // Creation de la fonction d'attaque du héros + click bouton
-
-document.getElementById('attack').addEventListener('click', heroAttack);
-
+function linkButton(){
+    document.getElementById('attack').addEventListener('click', heroAttack);
+}
+linkButton();
 function heroAttack(){
+    document.getElementById('divAttack').innerHTML = '<button id="attack">Attaquer</button>';
     monster.stamina.health -= hero.strength;
     if(monster.stamina.health > 0){
         displayMonsterHP();
         document.getElementById('msgFight').innerHTML = 'Vous avez infligé ' + hero.strength + ' dégats au monstre';
+        document.getElementById('divAttack').innerHTML = '';
+        var timer;
+        if(timer){
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function(){
+            monsterAttack();
+        }, 2500);
     }
     else{
-        document.getElementById('msgFight').innerHTML = 'Félicitations, vous avez vaincu le monstre. Vous avez accès à la boutique!';
+        displayMonsterHP();
+        document.getElementById('msgFight').innerHTML = 'Félicitations, vous avez vaincu le monstre.';
+        loot();
     }
     console.log(monster.stamina.health);
 }
@@ -136,5 +144,37 @@ function heroAttack(){
 
 function monsterAttack(){
     hero.stamina.health -= monster.strength;
-    console.log(hero.stamina.health);
+    if(hero.stamina.health > 0){
+        displayHeroHP();
+        document.getElementById('msgFight').innerHTML = 'Vous avez subis ' + monster.strength + ' dégats';
+        document.getElementById('divAttack').innerHTML = '<button id="attack">Attaquer</button>';
+        linkButton();
+    }
+    else{
+        displayHeroHP();
+        document.getElementById('msgFight').innerHTML = 'Vous avez perdu, sale nul de merde';
+    }
+}
+
+//Loot après le combat
+function loot(){
+    hero.gold += 3;
+    dropChance();
+    if(dropChance() == true){
+        hero.inventory.lootPot + 1;
+    }
+    else{
+        hero.inventory.lootPot = hero.inventory.lootPot;
+    }
+    console.log(dropChance());
+}
+function dropChance(){
+    var chanceHero = 10 / 100;
+    var chanceLose = Math.random().toFixed(1);
+    if(chanceHero < chanceLose){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
