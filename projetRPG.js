@@ -102,19 +102,31 @@ function randomMonster(){
     monster.name[Math.floor(Math.random()*2)];
 }
 
-// Creation du shop + item dans le shop
+// Fonction d'affichage du shop
 
-
+function displayShop(){
+    document.getElementById('fightLog').innerHTML = '';
+    document.getElementById('fightLog').innerHTML = '<div id="shopDisplay"></div>';
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="healingPot"></i>'; //LIER LES ID AUX IMAGES DE POTIONS
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="strengthPot"></i>';
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="agilityPot"></i>';
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="staminaPot"></i>';
+    document.getElementById('healingPot').addEventListener('click',buyingFunction);
+    document.getElementById('strengthPot').addEventListener('click',buyingFunction);
+    document.getElementById('agilityPot').addEventListener('click',buyingFunction);
+    document.getElementById('staminaPot').addEventListener('click',buyingFunction);
+}
 
 // Bouton d'accès au shop
 
-function shopAccess(){
-    
+function shopAccess(){  
+    document.getElementById('commands').innerHTML = '<button id="shop">Acceder à la boutique</button>';
 }
 
 // Creation de la fonction d'attaque du héros + click bouton
 function linkButton(){
     document.getElementById('attack').addEventListener('click', heroAttack);
+    document.getElementById('shop').addEventListener('click',displayShop);
 }
 linkButton();
 function heroAttack(){
@@ -136,6 +148,7 @@ function heroAttack(){
         displayMonsterHP();
         document.getElementById('msgFight').innerHTML = 'Félicitations, vous avez vaincu le monstre.';
         loot();
+        shopAccess();
     }
     console.log(monster.stamina.health);
 }
@@ -152,7 +165,7 @@ function monsterAttack(){
     }
     else{
         displayHeroHP();
-        document.getElementById('msgFight').innerHTML = 'Vous avez perdu, sale nul de merde';
+        document.getElementById('msgFight').innerHTML = 'Vous avez perdu!';
     }
 }
 
