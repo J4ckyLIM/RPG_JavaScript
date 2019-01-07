@@ -102,21 +102,46 @@ function randomMonster(){
     monster.name[Math.floor(Math.random()*2)];
 }
 
-// Creation du shop + item dans le shop
+// Fonction d'affichage du shop
+
+function linkShopButton(){
+    document.getElementById('shop').addEventListener('click',displayShop);
+}
 
 
+function displayShop(){
+    document.getElementById('commands').innerHTML = '';
+    document.getElementById('commands').innerHTML = '<button id="inventory">Acceder à l\'inventaire</button>';
+    document.getElementById('fightLog').innerHTML = '';
+    document.getElementById('fightLog').innerHTML = '<div id="shopDisplay"></div>';
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="healingPot"></i>'; //LIER LES ID AUX IMAGES DE POTIONS
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="strengthPot"></i>';
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="agilityPot"></i>';
+    document.getElementById('shopDisplay').innerHTML =  '<i class="pots" id ="staminaPot"></i>';
+    document.getElementById('healingPot').addEventListener('click',buyingFunction);
+    document.getElementById('strengthPot').addEventListener('click',buyingFunction);
+    document.getElementById('agilityPot').addEventListener('click',buyingFunction);
+    document.getElementById('staminaPot').addEventListener('click',buyingFunction);
+}
+
+// Fonction d'affichage de l'inventaire
+
+function displayInventory(){
+    document.getElementById('inventory').innerHTML = 
+}
 
 // Bouton d'accès au shop
 
-function shopAccess(){
-    
+function shopAccess(){  
+    document.getElementById('commands').innerHTML = '<button id="shop">Acceder à la boutique</button>';
+    linkShopButton();
 }
 
-// Creation de la fonction d'attaque du héros + click bouton
-function linkButton(){
+// fonction d'attaque du héros + click bouton
+function linkAttackButton(){
     document.getElementById('attack').addEventListener('click', heroAttack);
 }
-linkButton();
+linkAttackButton();
 function heroAttack(){
     document.getElementById('divAttack').innerHTML = '<button id="attack">Attaquer</button>';
     monster.stamina.health -= hero.strength;
@@ -136,11 +161,12 @@ function heroAttack(){
         displayMonsterHP();
         document.getElementById('msgFight').innerHTML = 'Félicitations, vous avez vaincu le monstre.';
         loot();
+        shopAccess();
     }
     console.log(monster.stamina.health);
 }
  
-// Creation de la fonction d'attaque du monstre 
+// fonction d'attaque du monstre 
 
 function monsterAttack(){
     hero.stamina.health -= monster.strength;
@@ -148,11 +174,11 @@ function monsterAttack(){
         displayHeroHP();
         document.getElementById('msgFight').innerHTML = 'Vous avez subis ' + monster.strength + ' dégats';
         document.getElementById('divAttack').innerHTML = '<button id="attack">Attaquer</button>';
-        linkButton();
+        linkAttackButton();
     }
     else{
         displayHeroHP();
-        document.getElementById('msgFight').innerHTML = 'Vous avez perdu, sale nul de merde';
+        document.getElementById('msgFight').innerHTML = 'Vous avez perdu!';
     }
 }
 
