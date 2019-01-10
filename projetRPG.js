@@ -148,7 +148,7 @@ function heroAttack(){
     if(monster.stamina.health > 0){
         displayMonsterHP();
         document.getElementById('msgFight').innerHTML = 'Vous avez infligé ' + hero.strength + ' dégats au monstre';
-        document.getElementById('divAttack').innerHTML = '';
+        document.getElementById('divAttack').innerHTML = '@';
         var timer;
         if(timer){
             clearTimeout(timer);
